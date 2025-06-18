@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Belgut Dairy MIS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="profile-info">
+                <img src="images/profile-icon.jpg" alt="Profile">
+                <h3 id="userName">Immaculate</h3>
+                <p id="farmName">Belgut</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                     <li><a href="index.html"><i class="icon-home"></i> Home</a></li>
+                    <li class="active"><a href="dashboard.html"><i class="icon-dashboard"></i> Dashboard</a></li>
+                    <li><a href="milk-recording.html"><i class="icon-milk"></i> Milk Recording</a></li>
+                    <li><a href="herd-management.html"><i class="icon-herd"></i> Herd Management</a></li>
+                    <li><a href="inventory.html"><i class="icon-inventory"></i> Inventory</a></li>
+                    <li><a href="reports.html"><i class="icon-reports"></i> Reports</a></li>
+                    <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+                    <li><a href="#" id="logoutBtn"><i class="icon-logout"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <div class="notification">
+                        <i class="icon-notification"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-menu">
+                        <img src="images/profile-icon.jpg" alt="User">
+                    </div>
+                </div>
+            </header>
+            
+            <div class="dashboard-widgets">
+                <div class="widget">
+                    <h3>Today's Milk Production</h3>
+                    <div class="widget-content">
+                        <span class="value" id="todayMilk">0</span>
+                        <span class="unit">liters</span>
+                    </div>
+                    <div class="widget-footer">
+                        <a href="milk-recording.html">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Total Animals</h3>
+                    <div class="widget-content">
+                        <span class="value" id="totalAnimals">0</span>
+                    </div>
+                    <div class="widget-footer">
+                        <a href="herd-management.html">Manage Herd</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Feed Inventory</h3>
+                    <div class="widget-content">
+                        <span class="value" id="feedStock">0</span>
+                        <span class="unit">kg</span>
+                    </div>
+                    <div class="widget-footer">
+                        <a href="inventory.html">Check Inventory</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Monthly Revenue</h3>
+                    <div class="widget-content">
+                        <span class="value" id="monthlyRevenue">0</span>
+                        <span class="unit">KES</span>
+                    </div>
+                    <div class="widget-footer">
+                        <a href="reports.html">View Reports</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-charts">
+                <div class="chart-container">
+                    <h3>Milk Production (Last 7 Days)</h3>
+                    <canvas id="milkChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Financial Overview</h3>
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="recent-activity">
+                <h3>Recent Activity</h3>
+                <ul id="activityList">
+                    <!-- Activities will be populated by JavaScript -->
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

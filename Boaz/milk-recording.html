@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milk Recording - Belgut Dairy MIS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <!-- Same sidebar as dashboard.html -->
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Milk Recording</h1>
+                <div class="header-actions">
+                    <button id="addMilkRecord" class="primary-button">+ Add Record</button>
+                </div>
+            </header>
+            
+            <div class="content-section">
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="filterDate">Date:</label>
+                        <input type="date" id="filterDate">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterAnimal">Animal:</label>
+                        <select id="filterAnimal">
+                            <option value="all">All Animals</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <button id="applyFilter" class="secondary-button">Apply Filters</button>
+                    <button id="resetFilter" class="tertiary-button">Reset</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="milkRecordsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Animal ID</th>
+                                <th>Animal Name</th>
+                                <th>Morning (L)</th>
+                                <th>Evening (L)</th>
+                                <th>Total (L)</th>
+                                <th>Quality</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Records will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button id="prevPage" disabled>Previous</button>
+                    <span id="pageInfo">Page 1 of 1</span>
+                    <button id="nextPage" disabled>Next</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Milk Recording Modal -->
+    <div id="milkRecordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">Add Milk Record</h2>
+            <form id="milkRecordForm">
+                <input type="hidden" id="recordId">
+                
+                <div class="form-group">
+                    <label for="recordDate">Date</label>
+                    <input type="date" id="recordDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recordAnimal">Animal</label>
+                    <select id="recordAnimal" required>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="morningYield">Morning Yield (L)</label>
+                        <input type="number" step="0.1" id="morningYield" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eveningYield">Evening Yield (L)</label>
+                        <input type="number" step="0.1" id="eveningYield" min="0">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="milkQuality">Quality</label>
+                    <select id="milkQuality">
+                        <option value="excellent">Excellent</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="milkNotes">Notes</label>
+                    <textarea id="milkNotes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Save Record</button>
+                    <button type="button" class="secondary-button cancel-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

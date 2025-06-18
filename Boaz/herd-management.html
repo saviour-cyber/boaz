@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herd Management - Belgut Dairy MIS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <!-- Same sidebar as dashboard.html -->
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Herd Management</h1>
+                <div class="header-actions">
+                    <button id="addAnimal" class="primary-button">+ Add Animal</button>
+                    <button id="addHealthRecord" class="secondary-button">+ Health Record</button>
+                </div>
+            </header>
+            
+            <div class="content-section">
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="animalStatus">Status:</label>
+                        <select id="animalStatus">
+                            <option value="all">All</option>
+                            <option value="active">Active</option>
+                            <option value="dry">Dry</option>
+                            <option value="pregnant">Pregnant</option>
+                            <option value="sick">Sick</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="animalBreed">Breed:</label>
+                        <select id="animalBreed">
+                            <option value="all">All Breeds</option>
+                            <option value="friesian">Friesian</option>
+                            <option value="ayrshire">Ayrshire</option>
+                            <option value="jersey">Jersey</option>
+                            <option value="guernsey">Guernsey</option>
+                        </select>
+                    </div>
+                    <button id="applyHerdFilter" class="secondary-button">Apply Filters</button>
+                    <button id="resetHerdFilter" class="tertiary-button">Reset</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="herdTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Breed</th>
+                                <th>Age</th>
+                                <th>Status</th>
+                                <th>Last Bred</th>
+                                <th>Due Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Animals will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="health-records-section">
+                    <h3>Health Records</h3>
+                    <table id="healthRecordsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Animal ID</th>
+                                <th>Animal Name</th>
+                                <th>Treatment</th>
+                                <th>Medication</th>
+                                <th>Vet</th>
+                                <th>Next Visit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Health records will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Animal Form Modal -->
+    <div id="animalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="animalModalTitle">Add Animal</h2>
+            <form id="animalForm">
+                <input type="hidden" id="animalId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animalName">Name</label>
+                        <input type="text" id="animalName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="animalTag">Tag ID</label>
+                        <input type="text" id="animalTag" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animalBreedSelect">Breed</label>
+                        <select id="animalBreedSelect" required>
+                            <option value="friesian">Friesian</option>
+                            <option value="ayrshire">Ayrshire</option>
+                            <option value="jersey">Jersey</option>
+                            <option value="guernsey">Guernsey</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="animalAge">Age (years)</label>
+                        <input type="number" id="animalAge" min="0" max="30" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animalStatusSelect">Status</label>
+                        <select id="animalStatusSelect" required>
+                            <option value="active">Active</option>
+                            <option value="dry">Dry</option>
+                            <option value="pregnant">Pregnant</option>
+                            <option value="sick">Sick</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="animalBirthDate">Birth Date</label>
+                        <input type="date" id="animalBirthDate">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastBredDate">Last Bred Date</label>
+                        <input type="date" id="lastBredDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="dueDate">Due Date</label>
+                        <input type="date" id="dueDate">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="animalNotes">Notes</label>
+                    <textarea id="animalNotes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Save</button>
+                    <button type="button" class="secondary-button cancel-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Health Record Modal -->
+    <div id="healthRecordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="healthModalTitle">Add Health Record</h2>
+            <form id="healthRecordForm">
+                <input type="hidden" id="healthRecordId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="healthAnimal">Animal</label>
+                        <select id="healthAnimal" required>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthDate">Date</label>
+                        <input type="date" id="healthDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="healthTreatment">Treatment/Diagnosis</label>
+                    <input type="text" id="healthTreatment" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="healthMedication">Medication</label>
+                    <input type="text" id="healthMedication">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="healthVet">Veterinarian</label>
+                        <input type="text" id="healthVet">
+                    </div>
+                    <div class="form-group">
+                        <label for="nextVisitDate">Next Visit</label>
+                        <input type="date" id="nextVisitDate">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="healthNotes">Notes</label>
+                    <textarea id="healthNotes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Save</button>
+                    <button type="button" class="secondary-button cancel-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/herd-management.js"></script>
+</body>
+</html>

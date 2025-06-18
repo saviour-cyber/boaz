@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Belgut Dairy MIS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <!-- Same sidebar as dashboard.html -->
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Reports</h1>
+                <div class="header-actions">
+                    <button id="exportReport" class="secondary-button">Export Report</button>
+                    <button id="printReport" class="tertiary-button">Print</button>
+                </div>
+            </header>
+            
+            <div class="content-section">
+                <div class="report-controls">
+                    <div class="report-filter">
+                        <div class="filter-group">
+                            <label for="reportType">Report Type:</label>
+                            <select id="reportType">
+                                <option value="production">Production Report</option>
+                                <option value="financial">Financial Report</option>
+                                <option value="inventory">Inventory Report</option>
+                                <option value="health">Health Report</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="dateRange">Date Range:</label>
+                            <input type="text" id="dateRange" placeholder="Select date range">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="reportDetail">Detail Level:</label>
+                            <select id="reportDetail">
+                                <option value="summary">Summary</option>
+                                <option value="detailed">Detailed</option>
+                                <option value="daily">Daily Breakdown</option>
+                            </select>
+                        </div>
+                        
+                        <button id="generateReport" class="primary-button">Generate Report</button>
+                    </div>
+                </div>
+                
+                <div class="report-results">
+                    <div class="report-header">
+                        <h2 id="reportTitle">Production Report</h2>
+                        <div id="reportPeriod" class="report-period">January 1-31, 2024</div>
+                    </div>
+                    
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <canvas id="mainReportChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="secondaryReportChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Total Milk Production</h3>
+                            <div class="summary-value">2,450 liters</div>
+                            <div class="summary-change positive">+5% from last period</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Average per Animal</h3>
+                            <div class="summary-value">18.2 liters/day</div>
+                            <div class="summary-change negative">-2% from last period</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Feed Efficiency</h3>
+                            <div class="summary-value">1.4 liters/kg</div>
+                            <div class="summary-change neutral">No change</div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-table-container">
+                        <table id="reportDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Animal Count</th>
+                                    <th>Total Milk (L)</th>
+                                    <th>Avg. per Animal</th>
+                                    <th>Feed Used (kg)</th>
+                                    <th>Efficiency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Report data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="report-notes">
+                        <h3>Notes & Recommendations</h3>
+                        <ul>
+                            <li>Milk production peaked on January 15th with 92 liters</li>
+                            <li>Feed efficiency decreased slightly compared to last month</li>
+                            <li>Consider adjusting feed ratios for animals with below-average production</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/data.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>
